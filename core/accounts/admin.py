@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, Profile
 
 class CustomUserAdmin(UserAdmin):
     model = User
@@ -19,6 +19,16 @@ class CustomUserAdmin(UserAdmin):
                 'is_staff', 'is_active', 'is_superuser'
             ),
         }),
+        ('Groups permisions', {
+            "fields": (
+                'groups',
+            ),
+        }),
+        ('Important date', {
+            "fields": (
+                'last_login',
+            ),
+        }),
     )
     add_fieldsets = (
         (None, {
@@ -28,12 +38,5 @@ class CustomUserAdmin(UserAdmin):
             )
         }),
     )
-
+admin.site.register(Profile)
 admin.site.register(User,CustomUserAdmin)
-"""
-('Permisions', {
-    "fields": (
-        'is_staff', 'is_active', 'is_superuser'
-    ),
-})
-"""
